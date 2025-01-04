@@ -1,0 +1,40 @@
+﻿@model Student_Registration_Demo_WithAI.Models.Course
+
+<h2>Dersi Düzenle</h2>
+
+<form asp-action="EditCourse" method="post">
+    <input asp-for="CourseID" type="hidden" /> <!-- Hidden ID to ensure the correct course is updated -->
+
+    <div>
+        <label for="CourseName">Ders Adı:</label>
+        <input asp-for="CourseName" class="form-control" required />
+    </div>
+    <br />
+    <div>
+        <label for="CourseDescription">Ders Açıklaması:</label>
+        <textarea asp-for="CourseDescription" class="form-control"></textarea>
+    </div>
+    <br />
+    <div>
+        <label for="Credits">Kredi:</label>
+        <input asp-for="Credits" type="number" class="form-control" required />
+    </div>
+    <br />
+    <div>
+        <label for="InstructorName">Öğretmen Adı:</label>
+        <input asp-for="InstructorName" class="form-control" required />
+    </div>
+    <br />
+    <div>
+        <button type="submit" class="btn btn-primary">Güncelle</button>
+        <a asp-action="Courses" class="btn btn-secondary">İptal</a>
+    </div>
+</form>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div style="color: red;">
+        <p>Lütfen tüm alanları doğru doldurduğunuzdan emin olun.</p>
+    </div>
+}
+

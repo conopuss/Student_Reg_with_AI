@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Ders Önerileri";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Ders Önerileri</h2>
+
+    <!-- Error Message -->
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            <strong>Hata:</strong> @ViewBag.Error
+        </div>
+    }
+
+    <!-- Recommendations -->
+    @if (ViewBag.Recommendations != null)
+    {
+        <div class="card mt-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Cevap</h5>
+            </div>
+            <div class="card-body" style="background-color: #f9f9f9;">
+                <p style="background-color: #f9f9f9; font-family: Arial, sans-serif; line-height: 1.6;">
+                    @ViewBag.Recommendations
+                </p>
+            </div>
+        </div>
+    }
+
+    <!-- User Query Form -->
+    <form asp-action="GenerateRecommendations" method="post" class="mt-4">
+        <div class="form-group">
+            <label for="userQuery">Soru veya İstek:</label>
+            <textarea id="userQuery" name="userQuery" class="form-control" rows="4" placeholder="Örneğin: 'Bitirmek için kaç krediye ihtiyacım var?'" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Gönder</button>
+    </form>
+</div>

@@ -1,0 +1,25 @@
+﻿<h2 class="text-center">Yönetici Girişi</h2>
+
+<!-- Display Error Message -->
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.Error
+    </div>
+}
+
+<!-- Admin Login Form -->
+<form asp-action="AdminLogin" method="post" class="mt-4">
+    <div class="form-group">
+        <label for="Email">Email:</label>
+        <input type="email" name="Email" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="Password">Şifre:</label>
+        <input type="password" name="Password" class="form-control" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Giriş Yap</button>
+    <a asp-action="Login" class="btn btn-secondary">Geri Dön</a>
+</form>

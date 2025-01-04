@@ -1,0 +1,19 @@
+﻿@model Course
+
+<h2>Ders Detayları</h2>
+
+<!-- Back to Courses Button -->
+<a asp-action="Courses" class="btn btn-secondary mb-3">Ders Listesine Dön</a>
+
+<!-- Course Details -->
+<div class="card">
+    <div class="card-header">
+        <h3>@Model.CourseName</h3>
+    </div>
+    <div class="card-body">
+        <p><strong>Ders Kodu:</strong> @Model.CourseID</p>
+        <p><strong>Kredi:</strong> @Model.Credits</p>
+        <p><strong>Öğretmen:</strong> @Model.InstructorName</p>
+        <p><strong>Ders Açıklaması:</strong> @Model.CourseDescription</p>
+    </div>
+</div>

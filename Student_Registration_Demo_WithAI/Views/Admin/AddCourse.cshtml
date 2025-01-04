@@ -1,0 +1,34 @@
+﻿@model Course
+
+<div class="container mt-4">
+    <!-- Page Header -->
+    <div class="text-center">
+        <h2>Yeni Ders Ekle</h2>
+    </div>
+
+    <!-- Add Course Form -->
+    <form asp-action="AddCourse" method="post" class="mt-4">
+        <div class="form-group">
+            <label for="CourseName">Ders Adı:</label>
+            <input asp-for="CourseName" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+            <label for="CourseDescription">Ders Açıklaması:</label>
+            <input asp-for="CourseDescription" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+            <label for="Credits">Kredi:</label>
+            <input asp-for="Credits" type="number" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+            <label for="InstructorName">Öğretmen Adı:</label>
+            <input asp-for="InstructorName" class="form-control" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Kaydet</button>
+        <a asp-action="Courses" class="btn btn-secondary">Geri Dön</a>
+    </form>
+</div>

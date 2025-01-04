@@ -1,0 +1,95 @@
+﻿@model List<Registration>
+
+<div class="container mt-4">
+    <!-- Page Header -->
+    <div class="text-center">
+        <h2>Dersleriniz</h2>
+    </div>
+
+    <!-- Registered Courses (Ongoing) -->
+    <div class="mt-4">
+        <h4>Kayıtlı Dersler</h4>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Ders Adı</th>
+                    <th>Öğretmen</th>
+                    <th>Kayıt Tarihi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any(r => string.IsNullOrEmpty(r.Grade)))
+                {
+                    @foreach (var registration in Model.Where(r => string.IsNullOrEmpty(r.Grade)))
+                    {
+                        <tr>
+                            <td>@registration.Course.CourseName</td>
+                            <td>@registration.Course.InstructorName</td>
+                            <td>@registration.RegistrationDate.ToShortDateString()</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="3" class="text-center">Henüz kayıtlı dersiniz bulunmamaktadır.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Finished Courses -->
+    <div class="mt-4">
+        <h4>Bitirilen Dersler</h4>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Ders Adı</th>
+                    <th>Öğretmen</th>
+                    <th>Kredi</th>
+                    <th>Not</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any(r => !string.IsNullOrEmpty(r.Grade)))
+                {
+                    @foreach (var registration in Model.Where(r => !string.IsNullOrEmpty(r.Grade)))
+                    {
+                        <tr>
+                            <td>@registration.Course.CourseName</td>
+                            <td>@registration.Course.InstructorName</td>
+                            <td>@registration.Course.Credits</td>
+                            <td>@registration.Grade</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4" class="text-center">Henüz tamamlanmış dersiniz bulunmamaktadır.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mt-4">
+        <h5>Mevcut Dönem: @ViewBag.CurrentSemester. Dönem</h5>
+    </div>
+    <!-- Total Credits Completed -->
+    @if (Model != null && Model.Any(r => !string.IsNullOrEmpty(r.Grade)))
+    {
+        <div class="mt-4">
+            <h5>
+                Toplam Kredi Tamamlandı:
+                @Model.Where(r => !string.IsNullOrEmpty(r.Grade)).Sum(r => r.Course.Credits)
+            </h5>
+        </div>
+    }
+
+    <!-- Back to Index Button -->
+    <div class="mt-3">
+        <a asp-action="Index" class="btn btn-secondary">Ana Sayfaya Dön</a>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+﻿@model Student
+@using System.Globalization
+
+<h2 class="text-center">Giriş Yap</h2>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.Error
+    </div>
+}
+
+<form asp-action="Login" method="post" class="mt-4">
+    <div class="form-group">
+        <label for="Email">Email:</label>
+        <input type="email" name="Email" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="Password">Şifre:</label>
+        <input type="password" name="Password" class="form-control" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Giriş Yap</button>
+    <a asp-action="AdminLogin" class="btn btn-secondary">Yönetici Girişi</a>
+
+</form>

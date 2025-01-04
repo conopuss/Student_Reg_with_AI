@@ -1,0 +1,47 @@
+﻿@model Student
+
+<div class="container mt-4">
+    <!-- Logout Link -->
+    <div class="d-flex justify-content-end">
+        <a asp-action="Logout" class="btn btn-danger btn-sm">Çıkış Yap</a>
+    </div>
+
+    <!-- Welcome Section -->
+    <div class="text-center mt-4">
+        <h2>Hoşgeldiniz, @Model.FirstName @Model.LastName</h2>
+    </div>
+
+    <!-- Student Details Section -->
+    <div class="card mt-4">
+        <div class="card-header">
+            <h4>Bilgileriniz</h4>
+        </div>
+        <div class="card-body">
+            <p><strong>Email:</strong> @Model.Email</p>
+            <p><strong>Telefon:</strong> @Model.PhoneNumber</p>
+            <p><strong>Kayıt Tarihi:</strong> @Model.EnrollmentDate.ToShortDateString()</p>
+        </div>
+    </div>
+
+    <!-- Courses Section -->
+    <div class="mt-4">
+        <h4>Dersleriniz</h4>
+        <div class="d-flex gap-3">
+            <a asp-controller="Home"
+               asp-action="RegisteredCourses"
+               class="btn btn-primary">
+                Kayıtlı Derslerinizi Görüntüleyin
+            </a>
+            <a asp-controller="Home"
+               asp-action="Courses"
+               class="btn btn-success">
+                Yeni Derslere Kayıt Olun
+            </a>
+            <a asp-controller="Home"
+               asp-action="GenerateRecommendations"
+               class="btn btn-info" title="AI Destekli Öneriler">
+                <i class="fas fa-robot"></i> Size nasıl yardım edebilirim?
+            </a>
+        </div>
+    </div>
+</div>

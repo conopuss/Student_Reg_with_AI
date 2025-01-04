@@ -1,0 +1,85 @@
+﻿@model List<Student_Registration_Demo_WithAI.Models.Registration>
+
+<div class="container mt-4">
+    <!-- Page Header -->
+    <div class="card text-center">
+        <div class="card-body">
+            <h2 class="card-title">Öğrenci Derslerini Düzenle</h2>
+        </div>
+    </div>
+
+    <!-- Success/Info Message -->
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-info mt-4" role="alert">
+            @TempData["Message"]
+        </div>
+    }
+
+    <!-- Current Registrations -->
+    <div class="mt-4">
+        <h3>Mevcut Kayıtlı Dersler</h3>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Ders Adı</th>
+                    <th>Öğretmen</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (var registration in Model)
+                    {
+                        <tr>
+                            <td>@registration.Course?.CourseName </td>
+                            <td>@registration.Course?.InstructorName </td>
+                            <td>
+                                <a asp-action="DeleteRegistration"
+                                   asp-route-id="@registration.RegistrationID"
+                                   asp-route-studentID="@registration.StudentID"
+                                   class="btn btn-danger btn-sm"
+                                   onclick="return confirm('Bu dersi silmek istediğinizden emin misiniz?');">
+                                    Sil
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="3">Kayıtlı ders yok.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Add New Course -->
+    <div class="mt-4">
+        <h3>Yeni Ders Ekle</h3>
+        <form asp-action="AddRegistration" method="post" class="form-inline">
+            <div class="form-group">
+                <select name="CourseID" class="form-control" required>
+                    <option value="">Ders Seçin</option>
+                    @if (ViewBag.AvailableCourses != null)
+                    {
+                        @foreach (var course in ViewBag.AvailableCourses as List<Student_Registration_Demo_WithAI.Models.Course>)
+                        {
+                            <option value="@course.CourseID">@course.CourseName</option>
+                        }
+                    }
+                </select>
+            </div>
+            <input type="hidden" name="StudentID" value="@ViewBag.StudentID" />
+            <button type="submit" class="btn btn-success">Ekle</button>
+        </form>
+    </div>
+
+    <!-- Back Button -->
+    <div class="mt-3">
+        <a asp-action="EditStudent" asp-route-id="@ViewBag.StudentID" class="btn btn-secondary">Geri Dön</a>
+    </div>
+</div>

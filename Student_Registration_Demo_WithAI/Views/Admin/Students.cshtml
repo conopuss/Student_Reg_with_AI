@@ -1,0 +1,53 @@
+﻿@model List<Student_Registration_Demo_WithAI.Models.Student>
+
+<div class="container mt-4">
+    <!-- Page Header -->
+    <div class="text-center">
+        <h2>Öğrenci Yönetimi</h2>
+    </div>
+
+    <!-- Add New Student Button -->
+    <div class="text-end mb-3">
+        <a asp-action="AddStudent" class="btn btn-success">Yeni Öğrenci Ekle</a>
+    </div>
+
+    <!-- Students Table -->
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Adı Soyadı</th>
+                <th>Email</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var student in Model)
+            {
+                <tr>
+                    <td>@student.StudentID</td>
+                    <td>@student.FirstName @student.LastName</td>
+                    <td>@student.Email</td>
+                    <td>
+                        <a asp-action="EditStudent"
+                           asp-route-id="@student.StudentID"
+                           class="btn btn-primary btn-sm">
+                            Düzenle
+                        </a>
+                        <a asp-action="DeleteStudent"
+                           asp-route-id="@student.StudentID"
+                           class="btn btn-danger btn-sm"
+                           onclick="return confirm('Bu öğrenciyi silmek istediğinizden emin misiniz?');">
+                            Sil
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- Back to Admin Panel Button -->
+    <div class="mt-4">
+        <a asp-action="Index" class="btn btn-secondary">Yönetici Paneline Dön</a>
+    </div>
+</div>
